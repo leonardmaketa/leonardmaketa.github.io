@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maketa Hydro</title>
+<meta name="description" content="Eng. Leonard Richard Maketa: Senior Hydrologist, Water Resources Engineer and GIS Expert in Dar es Salaam, Tanzania.">
+<link rel="icon" href="favicon-64.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a river runs through it. Light, open water-blue pages carried by one flowing wave line from the logo; navy bands for figures and contact; the portrait sits inside the logo's water drop. */
+:root{
+  --paper:#F4F8FD; --surface:#FFFFFF; --ink:#0B1F4D; --muted:#4A5E80; --line:#D3E0F0; --chip:#E6EFFB;
+  --navy:#0C2A6E; --blue:#0F62D6; --sky:#1C9BEF; --teal:#0E9C84; --green:#3A9A48;
+  --on-navy:#EEF4FF; --on-navy-muted:#B4C8EA; --wave:#C9DCF4;
+  --display:"Sora","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --wrap:1160px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#061430; --surface:#0C1F45; --ink:#E7EFFC; --muted:#A6B8D8; --line:#1F3763; --chip:#13305F;
+  --navy:#081F52; --blue:#5AA8FF; --sky:#62C2FF; --teal:#3DD5B9; --green:#6CCB78;
+  --on-navy:#EEF4FF; --on-navy-muted:#A9BFE3; --wave:#183563; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#061430; --surface:#0C1F45; --ink:#E7EFFC; --muted:#A6B8D8; --line:#1F3763; --chip:#13305F;
+  --navy:#081F52; --blue:#5AA8FF; --sky:#62C2FF; --teal:#3DD5B9; --green:#6CCB78;
+  --on-navy:#EEF4FF; --on-navy-muted:#A9BFE3; --wave:#183563; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;text-wrap:balance;color:var(--ink)}
+h2{font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.01em}
+h3{font-size:19px;font-weight:600}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:500}
+section{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 56px;align-items:end;margin-bottom:40px}
+.sec-head .lead{color:var(--muted);max-width:60ch}
+.sec-head>div{display:grid;gap:12px}
+@media (max-width:860px){.sec-head{grid-template-columns:1fr}}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:10px}
+.brand img{height:60px;width:auto}
+.nav{display:flex;gap:6px;align-items:center}
+.nav a{font-family:var(--display);font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:999px}
+.nav a:hover{background:var(--chip)}
+.nav a.cta{background:var(--blue);color:#fff;padding:9px 18px}
+.nav a.cta:hover{background:var(--navy)}
+@media (max-width:900px){.nav a:not(.cta){display:none}.brand img{height:48px}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(40px,6vw,80px) clamp(48px,6vw,72px);background:linear-gradient(180deg,var(--surface),var(--paper))}
+.hero .waves{position:absolute;inset:auto 0 0 0;height:220px;width:100%;pointer-events:none}
+.hero .waves path{fill:none;stroke:var(--wave);stroke-width:1.5}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(34px,5.2vw,60px);font-weight:800;letter-spacing:-.02em;margin-top:16px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--blue),var(--sky) 55%,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .intro{margin-top:22px;font-size:19px;color:var(--muted);max-width:58ch}
+.hero .intro b{color:var(--ink);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:15px;padding:13px 22px;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--navy)}
+.btn.ghost{border-color:var(--line);color:var(--ink);background:var(--surface)}
+.btn.ghost:hover{border-color:var(--blue)}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;padding:0;list-style:none}
+.creds li{font-family:var(--mono);font-size:13px;padding:7px 12px;border-radius:999px;background:var(--chip);color:var(--ink)}
+.creds a{color:inherit}
+.drop{position:relative;width:min(420px,100%);margin-inline:auto}
+.drop svg{width:100%;height:auto;display:block;overflow:visible}
+.drop-tag{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);white-space:nowrap;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-family:var(--display);font-weight:600;font-size:14px;color:var(--ink);box-shadow:0 8px 24px rgba(12,42,110,.12)}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.drop{width:min(300px,78%)}}
+
+/* Figures band */
+.figures{background:var(--navy);color:var(--on-navy);padding-block:40px}
+.figures dl{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.figures div{display:grid;gap:4px;padding-left:18px;border-left:2px solid var(--sky)}
+.figures dt{order:2;color:var(--on-navy-muted);font-size:15px}
+.figures dd{order:1;margin:0;font-family:var(--display);font-weight:700;font-size:clamp(30px,3.6vw,42px);color:#fff;font-variant-numeric:tabular-nums}
+.figures dd small{font-size:.5em;font-weight:600;margin-left:4px;color:var(--on-navy-muted)}
+@media (max-width:700px){.figures dl{grid-template-columns:1fr}}
+
+/* Photo band */
+.band{position:relative;margin:0}
+.band img{width:100%;height:clamp(220px,34vw,440px);object-fit:cover}
+.band figcaption{position:absolute;left:clamp(16px,4vw,32px);bottom:16px;font-family:var(--mono);font-size:13px;color:#fff;background:rgba(6,20,48,.62);padding:6px 12px;border-radius:999px}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:start}
+.about-grid .text{display:grid;gap:18px;font-size:18px}
+.about-grid .text p{max-width:62ch}
+.roles{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.roles li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:grid;gap:4px}
+.roles b{font-family:var(--display);font-weight:600;font-size:16px}
+.roles span{color:var(--muted);font-size:15px}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+
+/* Expertise */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.skill{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;display:grid;gap:12px;align-content:start}
+.skill .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--chip);color:var(--blue)}
+.skill p{color:var(--muted);font-size:16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.tags li{font-family:var(--mono);font-size:12.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
+@media (max-width:960px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.skills{grid-template-columns:1fr}}
+
+/* Model gallery */
+.alt{background:var(--surface);border-block:1px solid var(--line)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:0;list-style:none}
+.filters button{font-family:var(--display);font-size:14px;font-weight:500;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.gallery figure{margin:0;display:grid;gap:10px}
+.gallery button{padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper);cursor:zoom-in;display:block;width:100%}
+.gallery img{aspect-ratio:16/10;object-fit:cover;width:100%;transition:transform .35s ease}
+.gallery button:hover img{transform:scale(1.03)}
+.gallery figcaption{font-family:var(--display);font-weight:600;font-size:15px}
+.gallery figcaption span{display:block;font-family:var(--body);font-weight:400;font-size:14.5px;color:var(--muted);margin-top:2px}
+@media (max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.gallery{grid-template-columns:1fr}}
+
+/* Field work */
+.field{display:grid;gap:28px}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,48px);align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,32px)}
+.case:nth-child(even){grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.case:nth-child(even) .shots{order:-1}
+.case .meta{display:flex;flex-wrap:wrap;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.case .meta span{padding:4px 10px;border-radius:999px;background:var(--chip);color:var(--ink)}
+.case .meta .live{background:color-mix(in srgb,var(--teal) 18%,transparent);color:var(--teal)}
+.case .body{display:grid;gap:12px}
+.case h3{font-size:clamp(20px,2.2vw,25px)}
+.case p{color:var(--muted)}
+.case ul{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:4px;font-size:16px}
+.shots{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.shots.one{grid-template-columns:1fr}
+.shots.three>*:first-child{grid-column:1/-1}
+.shots button{padding:0;border:0;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--chip);display:block;width:100%}
+.shots img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.shots.one img,.shots.three>*:first-child img{aspect-ratio:16/9}
+@media (max-width:860px){.case,.case:nth-child(even){grid-template-columns:1fr}.case:nth-child(even) .shots{order:0}}
+
+/* Project record */
+.record-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.table-box{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;min-width:720px;font-size:15.5px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--paper);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+td.yr{font-family:var(--mono);font-size:13.5px;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}
+td .st{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:1px;background:color-mix(in srgb,var(--teal) 18%,transparent);color:var(--teal)}
+td.sec{white-space:nowrap}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.d-roads{background:#0F62D6}.d-urban{background:#7A5AF8}.d-water{background:#1C9BEF}.d-energy{background:#E8A317}.d-env{background:#3A9A48}
+
+/* Research */
+.degrees{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.degree{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;display:grid;gap:10px;align-content:start}
+.degree .when{font-family:var(--mono);font-size:13px;color:var(--teal)}
+.degree p{color:var(--muted);font-size:16px}
+.degree q{font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);quotes:none}
+@media (max-width:900px){.degrees{grid-template-columns:1fr}}
+
+/* Training */
+.train{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,48px);align-items:start}
+.train figure{margin:0;display:grid;gap:10px}
+.train figure button{padding:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:zoom-in;background:var(--paper)}
+.train figcaption{color:var(--muted);font-size:15px}
+.courses{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.courses li{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:2px}
+.courses b{font-family:var(--display);font-weight:600;font-size:15px}
+.courses span{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.practice{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:var(--chip);border-radius:16px;padding:16px 18px}
+.practice p{font-size:16px;max-width:52ch}
+@media (max-width:900px){.train{grid-template-columns:1fr}}
+@media (max-width:480px){.courses{grid-template-columns:1fr}}
+
+/* Service */
+.service{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;list-style:none;margin:0;padding:0}
+.service li{border-top:3px solid var(--sky);padding-top:16px;display:grid;gap:6px}
+.service .when{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.service p{color:var(--muted);font-size:16px}
+@media (max-width:860px){.service{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{background:var(--navy);color:var(--on-navy)}
+.contact h2{color:#fff}
+.contact .eyebrow{color:#7FE3CF}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
+.contact .lead{color:var(--on-navy-muted);margin-top:14px;max-width:52ch}
+.cards{display:grid;gap:12px}
+.ccard{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px 18px}
+.ccard .k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-navy-muted)}
+.ccard .v{font-family:var(--display);font-weight:600;font-size:18px;color:#fff;word-break:break-word;user-select:all}
+.ccard a.v{text-decoration:none}
+.ccard a.v:hover{text-decoration:underline}
+.copy{font-family:var(--display);font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer}
+.copy:hover{background:rgba(255,255,255,.12)}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+footer{background:var(--navy);color:var(--on-navy-muted);border-top:1px solid rgba(255,255,255,.12);padding-block:22px;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+footer a{color:#fff}
+
+/* Lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh;color:#fff}
+dialog.lb::backdrop{background:rgba(4,12,30,.86)}
+dialog.lb img{max-height:80vh;width:auto;margin:0 auto;border-radius:10px}
+dialog.lb p{text-align:center;margin-top:12px;font-size:15px}
+dialog.lb button{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(4,12,30,.7);color:#fff;font-size:22px;cursor:pointer}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Maketa Hydro · Eng. Leonard Richard Maketa">
+<meta property="og:description" content="Senior Hydrologist, Water Resources Engineer and GIS Expert in Dar es Salaam, Tanzania.">
+<meta property="og:url" content="https://leonardmaketa.github.io/">
+<meta property="og:image" content="https://leonardmaketa.github.io/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leonardmaketa.github.io/og-image.jpg">
+<link rel="canonical" href="https://leonardmaketa.github.io/">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Maketa Hydro home"><img src="logo-520.webp" alt="Maketa Hydro: Water, People, Resilient Future" width="520" height="159"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#models">Models</a>
+      <a href="#fieldwork">Field work</a>
+      <a href="#record">Projects</a>
+      <a href="#research">Research</a>
+      <a href="#training">Training</a>
+      <a class="cta" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <svg class="waves" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 120 C 240 70, 420 170, 720 118 S 1200 60, 1440 120"/>
+    <path d="M0 150 C 260 100, 460 200, 760 146 S 1220 92, 1440 150"/>
+    <path d="M0 180 C 220 136, 480 226, 780 176 S 1180 124, 1440 182"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Water · People · Resilient Future</p>
+      <h1>Designing roads, bridges and towns for the <em>water they will meet</em></h1>
+      <p class="intro">I am <b>Eng. Leonard Richard Maketa</b>, a Senior Hydrologist, Water Resources Engineer and GIS Expert based in Dar es Salaam. I model rivers, floods and catchments across Tanzania so that infrastructure is sized for real rainfall, real rivers and a changing climate.</p>
+      <div class="actions">
+        <a class="btn primary" href="#record">See my projects</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+      <ul class="creds">
+        <li>Professional Engineer · ERB No. 10615</li>
+        <li>PhD Researcher · University of Dar es Salaam</li>
+        <li>Managing Director · <a href="https://skyengineers.github.io" rel="noopener">Sky Engineers Ltd</a></li>
+      </ul>
+    </div>
+    <div class="drop">
+      <svg viewBox="0 0 400 520" role="img" aria-label="Portrait of Eng. Leonard Richard Maketa">
+        <defs>
+          <clipPath id="dropClip"><path d="M200 18 C 160 100, 34 214, 34 334 C 34 432, 108 504, 200 504 C 292 504, 366 432, 366 334 C 366 214, 240 100, 200 18 Z"/></clipPath>
+          <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3FB3FF"/><stop offset=".55" stop-color="#0F62D6"/><stop offset="1" stop-color="#14B89A"/></linearGradient>
+          <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFE6FF"/><stop offset="1" stop-color="#EEF1F4"/></linearGradient>
+          <linearGradient id="fadeGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000"/><stop offset=".22" stop-color="#fff"/></linearGradient>
+          <mask id="fadeTop" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="540"><rect x="0" y="130" width="400" height="410" fill="url(#fadeGrad)"/></mask>
+        </defs>
+        <path d="M200 18 C 160 100, 34 214, 34 334 C 34 432, 108 504, 200 504 C 292 504, 366 432, 366 334 C 366 214, 240 100, 200 18 Z" fill="url(#fill)"/>
+        <g clip-path="url(#dropClip)"><image href="leonard.webp" x="0" y="130" width="400" height="400" preserveAspectRatio="xMidYMid slice" mask="url(#fadeTop)"/></g>
+        <path d="M200 18 C 160 100, 34 214, 34 334 C 34 432, 108 504, 200 504 C 292 504, 366 432, 366 334 C 366 214, 240 100, 200 18 Z" fill="none" stroke="url(#ring)" stroke-width="12"/>
+        <path d="M150 120 C 120 170, 92 206, 78 250" fill="none" stroke="#FFFFFF" stroke-opacity=".75" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <span class="drop-tag">Eng. Leonard Richard Maketa</span>
+    </div>
+  </div>
+</section>
+
+<section class="figures" aria-label="At a glance">
+  <div class="wrap">
+    <dl>
+      <div><dt>consultancy assignments in hydrology, hydraulics and water resources</dt><dd>40<small>+</small></dd></div>
+      <div><dt>Koga Bridge span, the largest waterway I have designed</dt><dd>120<small>m</small></dd></div>
+      <div><dt>countries linked by the Songwe River flood early warning system</dt><dd>2<small>Tanzania · Malawi</small></dd></div>
+    </dl>
+  </div>
+</section>
+
+<figure class="band">
+  <img src="band-bridge.webp" alt="Bridge over a river, inspected during fieldwork" width="2200" height="990">
+  <figcaption>Bridge and river crossing · field inspection</figcaption>
+</figure>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="text">
+      <p class="eyebrow">About</p>
+      <h2>Hydrology that turns rainfall and rivers into design numbers</h2>
+      <p>I am a registered Professional Engineer specialising in hydrology, hydraulic modelling, geospatial analysis and climate-resilient infrastructure. My work sets the design floods, waterway openings and drainage that roads, bridges, airstrips, dams, irrigation schemes and towns depend on.</p>
+      <p>I have delivered hydrology for TANROADS road and bridge programmes, World Bank TACTIC urban investments, a trans-boundary flood early warning system, and irrigation and dam schemes across Tanzania. Alongside consulting, I am a PhD researcher at the University of Dar es Salaam, studying how surface water and groundwater interact in the Katuma River catchment.</p>
+    </div>
+    <ul class="roles">
+      <li><b>Senior Hydrologist</b><span>Road, bridge, urban and irrigation projects across Tanzania</span></li>
+      <li><b>Managing Director, Sky Engineers Ltd</b><span>Water resources, GIS, climate and environmental consultancy in Ubungo, Dar es Salaam</span></li>
+      <li><b>GIS Expert, Maketa GIS Solution</b><span>Independent practice for spatial analysis, catchment mapping and GIS training</span></li>
+      <li><b>PhD Researcher, University of Dar es Salaam</b><span>Water Resources Engineering, Katuma River catchment</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="expertise" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Expertise</p><h2>What I model, map and design</h2></div>
+      <p class="lead">Each assignment goes from field survey and data to a calibrated model and a design you can build from.</p>
+    </div>
+    <div class="skills">
+      <article class="skill">
+        <div class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7C9 7 6 10 6 14a6 6 0 0 0 12 0c0-4-3-7-6-11.3z"/></svg></div>
+        <h3>Hydrological modelling</h3>
+        <p>Rainfall–runoff, design floods and catchment water balance, from small culverts to whole river basins.</p>
+        <ul class="tags"><li>SWAT+</li><li>HEC-HMS</li><li>HBV</li><li>Flood frequency</li></ul>
+      </article>
+      <article class="skill">
+        <div class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20M4 18V10m16 8v-8M4 10h16M8 10v8m8-8v8M2 22c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/></svg></div>
+        <h3>Hydraulic modelling</h3>
+        <p>Bridge waterway adequacy, scour, culvert sizing and flood inundation mapping in 1D and 2D.</p>
+        <ul class="tags"><li>HEC-RAS 1D / 2D</li><li>Bridges &amp; culverts</li><li>EPANET</li></ul>
+      </article>
+      <article class="skill">
+        <div class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20l4-8 3 4 3-6 4 10"/></svg></div>
+        <h3>Erosion &amp; sedimentation</h3>
+        <p>Soil loss, sediment yield and gully mapping to protect catchments, reservoirs and roads.</p>
+        <ul class="tags"><li>RUSLE</li><li>Sediment yield</li><li>Gully mapping</li></ul>
+      </article>
+      <article class="skill">
+        <div class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg></div>
+        <h3>GIS &amp; remote sensing</h3>
+        <p>Catchment delineation, terrain and land cover analysis, field GNSS surveys and finished maps.</p>
+        <ul class="tags"><li>ArcGIS / ArcHydro</li><li>QGIS</li><li>HEC-GeoHMS</li><li>Google Earth Pro</li></ul>
+      </article>
+      <article class="skill">
+        <div class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 0 1 16 0M2 14h20M7 18h10M9 22h6"/></svg></div>
+        <h3>Climate &amp; water resources</h3>
+        <p>Downscaled climate scenarios, irrigation and dam feasibility, and integrated water resources planning.</p>
+        <ul class="tags"><li>LARS-WG</li><li>CMhyd</li><li>CMIP6</li><li>IWRM</li></ul>
+      </article>
+      <article class="skill">
+        <div class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+        <h3>Design &amp; reporting</h3>
+        <p>Hydrological design memoranda, feasibility and design reports, drawings and tender documents.</p>
+        <ul class="tags"><li>AutoCAD Civil 3D</li><li>Design reports</li><li>Tender documents</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Models &amp; maps</p><h2>Hydrology, water resources, GIS and climate in practice</h2></div>
+      <p class="lead">Click any panel to see it full size.</p>
+    </div>
+    <ul class="filters" aria-label="Filter models and maps">
+      <li><button type="button" data-f="all" aria-pressed="true">All</button></li>
+      <li><button type="button" data-f="hydro" aria-pressed="false">Hydrology</button></li>
+      <li><button type="button" data-f="gw" aria-pressed="false">Groundwater</button></li>
+      <li><button type="button" data-f="flood" aria-pressed="false">Floods &amp; dams</button></li>
+      <li><button type="button" data-f="land" aria-pressed="false">Climate &amp; land</button></li>
+      <li><button type="button" data-f="gis" aria-pressed="false">GIS</button></li>
+    </ul>
+    <div class="gallery">
+      <figure data-cat="hydro"><button type="button"><img src="cap-hbv.webp" alt="HBV rainfall–runoff model on the Katuma River at Sitalike, simulated against observed daily flow" width="1400" height="875" loading="lazy"></button><figcaption>HBV hydrological modelling<span>Katuma River at Sitalike, simulated against observed daily flow</span></figcaption></figure>
+      <figure data-cat="hydro"><button type="button"><img src="cap-swat.webp" alt="SWAT+ water balance and water yield across the Katuma River catchment" width="1400" height="875" loading="lazy"></button><figcaption>SWAT+ catchment modelling<span>Water balance and water yield across the Katuma catchment</span></figcaption></figure>
+      <figure data-cat="hydro"><button type="button"><img src="cap-hms.webp" alt="HEC-HMS basin model and design-storm flood hydrograph" width="1400" height="875" loading="lazy"></button><figcaption>HEC-HMS flood hydrology<span>Basin model and design-storm flood hydrograph</span></figcaption></figure>
+      <figure data-cat="gw"><button type="button"><img src="cap-gw-map.webp" alt="Groundwater potential zones and borehole inventory, Katuma catchment" width="1400" height="875" loading="lazy"></button><figcaption>Groundwater mapping<span>Potential zones and borehole inventory, Katuma catchment</span></figcaption></figure>
+      <figure data-cat="gw"><button type="button"><img src="cap-gw-assess.webp" alt="GRACE water storage trend and tested borehole yields" width="1400" height="875" loading="lazy"></button><figcaption>Groundwater assessment<span>GRACE storage trend and tested borehole yields</span></figcaption></figure>
+      <figure data-cat="flood"><button type="button"><img src="cap-dam-alloc.webp" alt="Storage–reliability curves and a monthly allocation plan for a reservoir" width="1400" height="875" loading="lazy"></button><figcaption>Dam and water allocation<span>Storage–reliability curves and a monthly allocation plan</span></figcaption></figure>
+      <figure data-cat="flood"><button type="button"><img src="cap-dam-break.webp" alt="Breach outflow and flood wave travelling downstream of a dam" width="1400" height="875" loading="lazy"></button><figcaption>Dam break analysis<span>Breach outflow and the flood wave downstream</span></figcaption></figure>
+      <figure data-cat="flood"><button type="button"><img src="cap-flood.webp" alt="Flood-prone land along the Msimbazi River, Dar es Salaam" width="1400" height="875" loading="lazy"></button><figcaption>Flood mapping<span>Flood-prone land along the Msimbazi River, Dar es Salaam</span></figcaption></figure>
+      <figure data-cat="land"><button type="button"><img src="cap-climate.webp" alt="Rainfall today and projected rainfall and warming for 2041–2060 across Tanzania" width="1400" height="875" loading="lazy"></button><figcaption>Climate analysis and projection<span>Rainfall and warming for 2041–2060 across Tanzania</span></figcaption></figure>
+      <figure data-cat="land"><button type="button"><img src="cap-landcover.webp" alt="Tree cover and cropland change 2000–2040, Katuma catchment" width="1400" height="875" loading="lazy"></button><figcaption>Land cover classification and projection<span>Tree cover and cropland change 2000–2040, Katuma catchment</span></figcaption></figure>
+      <figure data-cat="land"><button type="button"><img src="cap-erosion.webp" alt="RUSLE soil loss across the Katuma catchment" width="1400" height="875" loading="lazy"></button><figcaption>Soil erosion and sediment modelling<span>RUSLE soil loss across the Katuma catchment</span></figcaption></figure>
+      <figure data-cat="gis"><button type="button"><img src="cap-agri.webp" alt="Maize suitability map of Tanzania and regions with the most highly suitable land" width="1400" height="875" loading="lazy"></button><figcaption>GIS in agriculture<span>Maize suitability across Tanzania</span></figcaption></figure>
+      <figure data-cat="gis"><button type="button"><img src="cap-gis.webp" alt="Terrain, rivers, lakes and regions of Tanzania" width="1400" height="875" loading="lazy"></button><figcaption>GIS analysis and mapping<span>Terrain, rivers, lakes and regions of Tanzania</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="fieldwork" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Field work</p><h2>From the riverbank to the design report</h2></div>
+      <p class="lead">Selected assignments with photos from site visits and the models built from them.</p>
+    </div>
+    <div class="field">
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span class="live">Ongoing</span><span>WANG'I WASA</span><span>2026</span></div>
+          <h3>Solar power for the Wanging'ombe water supply</h3>
+          <p>Team Leader for the local consultant within an international project team, moving the Makambako, Wanging'ombe and Rujewa water supply schemes from grid electricity to solar power for a 24-hour supply.</p>
+          <ul><li>Site visit and GIS screening of candidate solar sites</li><li>Licensing route with EWURA and EIA requirements with NEMC</li><li>Local price survey, Bills of Quantities and risk assessment</li></ul>
+        </div>
+        <div class="shots">
+          <button type="button"><img src="wang-1.webp" alt="Joint delegation at the Rujewa water treatment plant, 29 July 2026" width="1400" height="1054" loading="lazy"></button>
+          <button type="button"><img src="wang-2.webp" alt="Site inspection at the treatment works" width="1000" height="753" loading="lazy"></button>
+          <button type="button"><img src="wang-3.webp" alt="Reservoir and pumping facilities" width="1000" height="753" loading="lazy"></button>
+          <button type="button"><img src="wang-4.webp" alt="Candidate solar PV site near the intake" width="1000" height="563" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span class="live">Ongoing</span><span>TANROADS</span><span>2026</span></div>
+          <h3>Kisangara – Nyumba ya Mungu Road, Kilimanjaro</h3>
+          <p>Hydrological and hydraulic survey and drainage design for the 17.1 km road from Kisangara to the Nyumba ya Mungu dam in Mwanga District. A DEM-based catchment analysis and a field survey of 20 sites defined 31 drainage structures, including a new 15 m bridge, all checked for the 100-year flood with a climate change allowance.</p>
+        </div>
+        <div class="shots three">
+          <button type="button"><img src="kis-road.webp" alt="The alignment below the North Pare Mountains" width="1000" height="750" loading="lazy"></button>
+          <button type="button"><img src="kis-box.webp" alt="Existing box culvert checked in the field survey" width="453" height="341" loading="lazy"></button>
+          <button type="button"><img src="kis-scour.webp" alt="Erosion where runoff crosses the road" width="1000" height="750" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span class="live">Ongoing</span><span>TANAPA</span><span>2026</span></div>
+          <h3>Mahale National Park airstrip culvert</h3>
+          <p>Hydrological and hydraulic study to replace a box culvert under the Mahale airstrip, near Lake Tanganyika, that was washed out by floodwater.</p>
+          <ul><li>Site reconnaissance, flood marks and channel geometry</li><li>Gumbel rainfall frequency analysis and IDF curves</li><li>Design flood: Q100 plus a 15% climate change allowance</li><li>HEC-RAS sizing of the new cross-drainage structure</li></ul>
+        </div>
+        <div class="shots one">
+          <button type="button"><img src="mahale-culvert.webp" alt="The washed-out box culvert at Mahale National Park airstrip, Kigoma" width="980" height="722" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span class="live">Ongoing</span><span>TANROADS</span><span>2025 – present</span></div>
+          <h3>Lake Manyara Airport hydrology and drainage review</h3>
+          <p>Design review for the rehabilitation and upgrading of Lake Manyara Airport, with additional works at the Kaboni site and the Mto Athumani Bridge: catchment hydrology, design floods and sizing of airport drainage and hydraulic structures.</p>
+        </div>
+        <div class="shots">
+          <button type="button"><img src="manyara-airstrip.webp" alt="Lake Manyara Airport: site reconnaissance on the existing airstrip" width="1440" height="644" loading="lazy"></button>
+          <button type="button"><img src="manyara-2d.webp" alt="HEC-RAS 2D depth for the 100-year flood plus airport drainage, existing situation" width="622" height="495" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span class="live">Ongoing</span><span>TANROADS</span><span>2025 – present</span></div>
+          <h3>Emergency road works across 10 regions</h3>
+          <p>Design review and construction supervision after flood damage in Arusha, Tanga, Kilimanjaro, Dodoma, Manyara, Morogoro, Dar es Salaam, Lindi, Pwani and Mtwara, with hydrological checks on every culvert and bridge.</p>
+        </div>
+        <div class="shots">
+          <button type="button"><img src="ew-1.webp" alt="Mtumbei–Mpompera crossing, Lindi" width="1200" height="900" loading="lazy"></button>
+          <button type="button"><img src="ew-2.webp" alt="Nakalekwa Bwawani, Dar es Salaam" width="1000" height="750" loading="lazy"></button>
+          <button type="button"><img src="ew-3.webp" alt="Moka–Mtumbukule bridge site" width="1000" height="563" loading="lazy"></button>
+          <button type="button"><img src="ew-4.webp" alt="GNSS survey at Ngaro Bridge, Rufiji" width="800" height="1067" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span class="live">Ongoing</span><span>TANROADS HQ</span><span>2024 – present</span></div>
+          <h3>Bariadi – Salama – Ng'haya – Magu Road, 76 km</h3>
+          <p>Feasibility, ESIA and detailed design to bitumen standard, including HEC-RAS modelling of the 70 m Sukuma Bridge over the Simiyu River and sizing of every crossing along the route.</p>
+        </div>
+        <div class="shots three">
+          <button type="button"><img src="svc-water.webp" alt="Mhango Bridge over a small river on the Bariadi–Magu road" width="1000" height="562" loading="lazy"></button>
+          <button type="button"><img src="bm-1.webp" alt="Sukuma Bridge deck, Simiyu River" width="1080" height="607" loading="lazy"></button>
+          <button type="button"><img src="bm-2.webp" alt="Matu Bridge, CH 76+100" width="1080" height="810" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span>HEC-RAS 1D / 2D</span><span>Bridges · floodplains</span></div>
+          <h3>Bridge hydraulics and flood modelling</h3>
+          <p>Steady and unsteady HEC-RAS models that size bridge waterways, check scour and freeboard, and map flood depth and velocity, as on the Kogatende Bridge over the Mara River in Serengeti National Park.</p>
+        </div>
+        <div class="shots three">
+          <button type="button"><img src="ras-kogatende-3d.webp" alt="Kogatende Bridge, Mara River: water surface through the bridge reach" width="940" height="494" loading="lazy"></button>
+          <button type="button"><img src="ras-2d-velocity.webp" alt="2D depth and velocity field at a proposed bridge crossing" width="809" height="666" loading="lazy"></button>
+          <button type="button"><img src="ras-terrain.webp" alt="Terrain model and flood extent along the bridge alignment" width="940" height="562" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <div class="meta"><span>Field reconnaissance</span><span>Rivers · floodplains · erosion</span></div>
+          <h3>Reading the river on site</h3>
+          <p>Every design starts with a site visit: flood marks, channel shape, bed material, erosion and how people use the river. These observations calibrate the models and catch what maps miss.</p>
+        </div>
+        <div class="shots three">
+          <button type="button"><img src="svc-climate.webp" alt="Floodplain and road near Utete, Rufiji" width="1000" height="750" loading="lazy"></button>
+          <button type="button"><img src="svc-gis.webp" alt="Seasonal river valley at Nakalekwa Bwawani, Dar es Salaam" width="1000" height="750" loading="lazy"></button>
+          <button type="button"><img src="svc-env.webp" alt="Eroded river channel at Kibata–Kipatimu, Lindi" width="1000" height="1333" loading="lazy"></button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="record">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Project record</p><h2>40+ assignments across Tanzania</h2></div>
+      <p class="lead">Hydrology and water resources work for road agencies, development partners, parks, utilities and research programmes.</p>
+    </div>
+    <div class="record-tools">
+      <ul class="filters" aria-label="Filter projects" id="recFilters" style="margin:0">
+        <li><button type="button" data-f="all" aria-pressed="true">All</button></li>
+        <li><button type="button" data-f="roads" aria-pressed="false">Roads, bridges &amp; airstrips</button></li>
+        <li><button type="button" data-f="urban" aria-pressed="false">Urban &amp; drainage</button></li>
+        <li><button type="button" data-f="water" aria-pressed="false">Water, irrigation &amp; dams</button></li>
+        <li><button type="button" data-f="energy" aria-pressed="false">Energy</button></li>
+        <li><button type="button" data-f="env" aria-pressed="false">Environment &amp; research</button></li>
+      </ul>
+      <span class="count" id="recCount" aria-live="polite">45 projects</span>
+    </div>
+    <div class="table-box">
+      <table>
+        <thead><tr><th scope="col">Project</th><th scope="col">Client</th><th scope="col">Year</th><th scope="col">Field</th></tr></thead>
+        <tbody id="recBody">
+          <tr data-s="energy"><td>Solar power plant for the Wanging'ombe water supply (Team Leader, local consultant)<span class="st">Ongoing</span></td><td>WANG'I WASA</td><td class="yr">2026</td><td class="sec"><span class="dot d-energy"></span>Energy</td></tr>
+          <tr data-s="roads"><td>Katoma – Kanyigo – Bukwali Road, Kagera: hydrology and drainage design<span class="st">Ongoing</span></td><td>—</td><td class="yr">2026</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Kisangara – Nyumba ya Mungu Road (17.1 km), Kilimanjaro: drainage design<span class="st">Ongoing</span></td><td>TANROADS</td><td class="yr">2026</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Mahale National Park airstrip culvert: hydrology and hydraulics<span class="st">Ongoing</span></td><td>TANAPA</td><td class="yr">2026</td><td class="sec"><span class="dot d-roads"></span>Airstrips</td></tr>
+          <tr data-s="roads"><td>Dodoma outer ring road addendum: Mkonze – Ntyuka – Chimwaga – Nanenane (26 km)<span class="st">Ongoing</span></td><td>TANROADS</td><td class="yr">2026</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="env"><td>Naitolia Restoration Model: soil erosion and gully mapping, Monduli<span class="st">Ongoing</span></td><td>IRA UDSM / Tanzania Partnership Program</td><td class="yr">2026</td><td class="sec"><span class="dot d-env"></span>Environment</td></tr>
+          <tr data-s="roads"><td>Lake Manyara Airport, Kaboni site and Mto Athumani Bridge design review<span class="st">Ongoing</span></td><td>TANROADS</td><td class="yr">2025–26</td><td class="sec"><span class="dot d-roads"></span>Airstrips</td></tr>
+          <tr data-s="roads"><td>Emergency road works, design review and supervision in 10 regions<span class="st">Ongoing</span></td><td>TANROADS</td><td class="yr">2025–26</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="urban"><td>TACTIC Tier 3, Zone 6: Vwawa, Tunduma and Kasulu towns<span class="st">Ongoing</span></td><td>World Bank Tanzania</td><td class="yr">2025–26</td><td class="sec"><span class="dot d-urban"></span>Urban</td></tr>
+          <tr data-s="urban"><td>TACTIC Tier 3, Zone 1: Handeni, Bagamoyo and Ifakara towns<span class="st">Ongoing</span></td><td>World Bank Tanzania</td><td class="yr">2025–26</td><td class="sec"><span class="dot d-urban"></span>Urban</td></tr>
+          <tr data-s="roads"><td>Ubena Junction – Lugoba Road upgrading (30.75 km)<span class="st">Ongoing</span></td><td>TANROADS</td><td class="yr">2025–26</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Bariadi – Salama – Ng'haya – Magu Road (76 km), incl. 70 m Sukuma Bridge<span class="st">Ongoing</span></td><td>TANROADS HQ</td><td class="yr">2024–26</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Nangombo – Chiwindi (39.4 km) and Mbinga – Litembo – Mkiri (22 km) roads, route selection (~525 km)<span class="st">Ongoing</span></td><td>TANROADS HQ</td><td class="yr">2024–26</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Munguri B Bridge and Kondoa Bridge, Kondoa – Mtiriangwi / Gisambalang Road<span class="st">Ongoing</span></td><td>TANROADS HQ</td><td class="yr">2024–26</td><td class="sec"><span class="dot d-roads"></span>Bridges</td></tr>
+          <tr data-s="water"><td>Flood early warning system, Songwe River Basin (Tanzania and Malawi), Project Coordinator<span class="st">Ongoing</span></td><td>Songwe River Basin Commission</td><td class="yr">2022–26</td><td class="sec"><span class="dot d-water"></span>Flood warning</td></tr>
+          <tr data-s="urban"><td>TACTIC Zone 1: Arusha, Dodoma, Tabora and Kigoma<span class="st">Ongoing</span></td><td>World Bank Tanzania</td><td class="yr">2021–26</td><td class="sec"><span class="dot d-urban"></span>Urban</td></tr>
+          <tr data-s="env"><td>Her Resilience Our Planet: hydrological baseline survey</td><td>CARE Tanzania</td><td class="yr">2025</td><td class="sec"><span class="dot d-env"></span>Climate</td></tr>
+          <tr data-s="roads"><td>Kogatende Bridge topographic and bathymetric survey and hydrology study, Serengeti</td><td>TANAPA / SEDCP-II</td><td class="yr">2025</td><td class="sec"><span class="dot d-roads"></span>Bridges</td></tr>
+          <tr data-s="urban"><td>Pugu Kwa Mjesa telecommunications tower: drainage risk assessment</td><td>Minara Tanzania</td><td class="yr">2024–25</td><td class="sec"><span class="dot d-urban"></span>Drainage</td></tr>
+          <tr data-s="urban"><td>TACTIC Tier 2, Zone 3: Bukoba, Musoma and Bariadi municipalities</td><td>World Bank Tanzania</td><td class="yr">2024–25</td><td class="sec"><span class="dot d-urban"></span>Urban</td></tr>
+          <tr data-s="urban"><td>TACTIC Zone 1: Tanga, Korogwe and Moshi councils</td><td>World Bank Tanzania</td><td class="yr">2024–25</td><td class="sec"><span class="dot d-urban"></span>Urban</td></tr>
+          <tr data-s="water"><td>Ngono Irrigation Scheme: feasibility study and detailed design</td><td>Government of Tanzania</td><td class="yr">2023–24</td><td class="sec"><span class="dot d-water"></span>Irrigation</td></tr>
+          <tr data-s="water"><td>Makondeko Irrigation Scheme, Tandahimba: feasibility study and detailed design</td><td>Government of Tanzania</td><td class="yr">2023–24</td><td class="sec"><span class="dot d-water"></span>Irrigation</td></tr>
+          <tr data-s="water"><td>Ngomai dams and irrigation scheme, Kongwa: feasibility study and detailed design</td><td>Government of Tanzania</td><td class="yr">2023–24</td><td class="sec"><span class="dot d-water"></span>Dams</td></tr>
+          <tr data-s="water"><td>Dirim – Tumati – Dongobesh dams and irrigation scheme, Mbulu</td><td>Government of Tanzania</td><td class="yr">2023–24</td><td class="sec"><span class="dot d-water"></span>Dams</td></tr>
+          <tr data-s="energy"><td>2 MW solar farm pre-feasibility at Zuzu, Mugumu and Nachingwea: site hydrology and flood risk</td><td>Private solar developer</td><td class="yr">2023–24</td><td class="sec"><span class="dot d-energy"></span>Energy</td></tr>
+          <tr data-s="env"><td>Standard Gauge Railway Lots 3 and 4 EIA, Makutupora – Isaka</td><td>SGR Project</td><td class="yr">2022</td><td class="sec"><span class="dot d-env"></span>EIA</td></tr>
+          <tr data-s="water"><td>Kiwira water supply: design review and construction supervision</td><td>Water authority</td><td class="yr">2022</td><td class="sec"><span class="dot d-water"></span>Water supply</td></tr>
+          <tr data-s="water"><td>Lake Victoria Basin integrated water resources management and development plan</td><td>Lake Victoria Basin Commission</td><td class="yr">2022</td><td class="sec"><span class="dot d-water"></span>IWRM</td></tr>
+          <tr data-s="urban"><td>Mama Samia Suluhu Hassan Industrial Park, Mlandizi: stormwater drainage</td><td>Government of Tanzania</td><td class="yr">2022</td><td class="sec"><span class="dot d-urban"></span>Drainage</td></tr>
+          <tr data-s="env"><td>BRrAIC: Building River Resilience through an Integrated Approach under Climate Change</td><td>University of Dar es Salaam</td><td class="yr">2021–22</td><td class="sec"><span class="dot d-env"></span>Research</td></tr>
+          <tr data-s="roads"><td>Malagarasi Bridge, international crossing Kilelema (TZ) – Buhema (Burundi)</td><td>TANROADS</td><td class="yr">2020</td><td class="sec"><span class="dot d-roads"></span>Bridges</td></tr>
+          <tr data-s="roads"><td>Songea Bypass (12.9 km): review and update of detailed design</td><td>TANROADS</td><td class="yr">2020</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Mpanda – Ugalla – Kaliua – Ulyankulu – Kahama Regional Road (456 km)</td><td>TANROADS</td><td class="yr">2020</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="water"><td>Mkulazi I sugarcane estate and factory: irrigation water and drainage</td><td>Mkulazi Holding Co.</td><td class="yr">2020</td><td class="sec"><span class="dot d-water"></span>Irrigation</td></tr>
+          <tr data-s="urban"><td>Dar es Salaam BRT Phase 5 depot: stormwater drainage design</td><td>TANROADS HQ</td><td class="yr">2019</td><td class="sec"><span class="dot d-urban"></span>Drainage</td></tr>
+          <tr data-s="roads"><td>Dareda – Dongobesh Regional Road upgrading (60 km)</td><td>TANROADS Manyara</td><td class="yr">2019</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Banana – Kitunda – Kivule – Msongola Road, Kitunda – Kivule section design review</td><td>TANROADS</td><td class="yr">2019</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Morogoro Road widening to six lanes, Kimara – Kiluvya (16.2 km), incl. Kibamba, Kiluvya and Mpiji bridges</td><td>TANROADS</td><td class="yr">2018</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Koga Bridge (120 m span), Tabora – Mpanda: design flood, scour and waterway</td><td>TANROADS</td><td class="yr">2018</td><td class="sec"><span class="dot d-roads"></span>Bridges</td></tr>
+          <tr data-s="roads"><td>Shabiby – Arusha roundabout (5 km) and Chimwaga – Chinyoya – Kikuyu (11 km) roads, Dodoma</td><td>TANROADS</td><td class="yr">2018</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Sengerema – Nyehunge – Kahunda and linked roads (116 km), Lake Victoria region</td><td>TANROADS</td><td class="yr">2018</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Nahumi Bridge (20 m span), Mtwara</td><td>TANROADS</td><td class="yr">2018</td><td class="sec"><span class="dot d-roads"></span>Bridges</td></tr>
+          <tr data-s="roads"><td>Isyonje – Kikondo – Makete Regional Road (96.2 km)</td><td>TANROADS</td><td class="yr">2018</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+          <tr data-s="roads"><td>Road projects in Kinondoni Municipality, Dar es Salaam</td><td>TARURA</td><td class="yr">2017</td><td class="sec"><span class="dot d-roads"></span>Roads</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="research" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Research &amp; education</p><h2>Three degrees, one question: how water moves through a catchment</h2></div>
+      <p class="lead">All three degrees are from the University of Dar es Salaam, from soil erosion to streamflow to groundwater.</p>
+    </div>
+    <div class="degrees">
+      <article class="degree">
+        <span class="when">2025 – present</span>
+        <h3>PhD Researcher, Water Resources Engineering</h3>
+        <q>Investigating surface and groundwater interactions in the Katuma River catchment, Tanzania</q>
+        <p>Linking river flow, groundwater levels and boreholes to understand how the Katuma River and its aquifers sustain each other.</p>
+      </article>
+      <article class="degree">
+        <span class="when">2020 – 2023</span>
+        <h3>MSc, Water Resources Engineering</h3>
+        <q>Impacts of climate and land use / cover changes on streamflow in the Katuma catchment</q>
+        <p>SWAT modelling with downscaled climate scenarios and land cover change to project future river flows.</p>
+      </article>
+      <article class="degree">
+        <span class="when">2013 – 2017</span>
+        <h3>BSc, Civil Engineering</h3>
+        <q>Assessment of soil erosion in the Ngerengere catchment using the RUSLE model</q>
+        <p>GIS-based soil loss mapping for the catchment that supplies water to Morogoro and Dar es Salaam.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="training">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Training</p><h2>Hands-on training in GIS, hydrology and hydraulics software</h2></div>
+      <p class="lead">Practical courses for engineers, scientists, students and government teams, built on real Tanzanian data and ending with a finished model or map.</p>
+    </div>
+    <div class="train">
+      <figure>
+        <button type="button"><img src="train-arcmap.webp" alt="ArcMap training exercise delineating the Katuma River catchment, with six steps from loading data to exporting the map" width="1400" height="875" loading="lazy"></button>
+        <figcaption>A typical session: delineating the Katuma River catchment in ArcMap, from loading the DEM to a finished map. Also taught in QGIS.</figcaption>
+      </figure>
+      <div>
+        <ul class="courses">
+          <li><span>GIS</span><b>ArcGIS / ArcMap</b></li>
+          <li><span>GIS</span><b>QGIS</b></li>
+          <li><span>GIS</span><b>Google Earth Pro &amp; GNSS</b></li>
+          <li><span>Hydrology</span><b>HEC-HMS</b></li>
+          <li><span>Hydraulics</span><b>HEC-RAS 1D / 2D</b></li>
+          <li><span>Hydrology</span><b>HEC-GeoHMS</b></li>
+          <li><span>Hydrology</span><b>SWAT+</b></li>
+          <li><span>Hydrology</span><b>HBV</b></li>
+          <li><span>Climate</span><b>Climate downscaling</b></li>
+          <li><span>Environment</span><b>RUSLE erosion modelling</b></li>
+          <li><span>Water supply</span><b>EPANET</b></li>
+          <li><span>Design</span><b>AutoCAD Civil 3D</b></li>
+        </ul>
+        <div class="practice">
+          <p><b>Maketa GIS Solution</b> is my independent practice for GIS consulting, catchment mapping and training.</p>
+          <a class="btn ghost" href="https://www.instagram.com/maketa_gis_solution/" rel="noopener">@maketa_gis_solution</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="service" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Leadership &amp; service</p><h2>Serving the engineering and water community</h2></div>
+    </div>
+    <ul class="service">
+      <li><span class="when">Sep 2025</span><h3>Event Manager and Master of Ceremonies, Annual Engineers' Day 2025</h3><p>Engineers Registration Board and Ministry of Works. Coordinated Tanzania's largest engineering conference, with over 4,000 delegates.</p></li>
+      <li><span class="when">2022 – 2023</span><h3>Secretary, Organising Committee, 24th WaterNet / WARFSA / GWP-SA Symposium</h3><p>Zanzibar, October 2023. Managed abstracts, speaker coordination and the conference programme.</p></li>
+      <li><span class="when">2015 – 2016</span><h3>Tanzania Coordinator, Rombo Dam feasibility study</h3><p>A collaboration with the Milwaukee School of Engineering (USA) and UDSM. Led coordination and data collection on the ground.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2>Let's talk about your project</h2>
+      <p class="lead">Hydrology and hydraulics for roads and bridges, flood studies, water resources, GIS mapping or training. Call or email and I will reply directly.</p>
+    </div>
+    <div class="cards">
+      <div class="ccard"><div><div class="k">Phone / WhatsApp</div><a class="v" href="tel:+255756210506">+255 756 210 506</a></div><button class="copy" type="button" data-copy="+255756210506">Copy</button></div>
+      <div class="ccard"><div><div class="k">Email</div><a class="v" href="mailto:leonardmaketa1993@gmail.com">leonardmaketa1993@gmail.com</a></div><button class="copy" type="button" data-copy="leonardmaketa1993@gmail.com">Copy</button></div>
+      <div class="ccard"><div><div class="k">Based in</div><span class="v">Dar es Salaam, Tanzania</span></div></div>
+      <div class="ccard"><div><div class="k">Company</div><a class="v" href="https://skyengineers.github.io" rel="noopener">Sky Engineers Ltd</a></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Maketa Hydro · Eng. Leonard Richard Maketa</span>
+    <span>Water · People · Resilient Future</span>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Image viewer">
+  <button type="button" id="lbClose" aria-label="Close">×</button>
+  <img id="lbImg" src="" alt="">
+  <p id="lbCap"></p>
+</dialog>
+
+<script>
+(function(){
+  // Model gallery filter
+  var gBtns=document.querySelectorAll('#models .filters button');
+  var figs=document.querySelectorAll('#models .gallery figure');
+  gBtns.forEach(function(b){b.addEventListener('click',function(){
+    var f=b.dataset.f; gBtns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    figs.forEach(function(fig){fig.hidden=!(f==='all'||fig.dataset.cat===f)});
+  })});
+  // Project record filter
+  var rBtns=document.querySelectorAll('#recFilters button');
+  var rows=document.querySelectorAll('#recBody tr');
+  var count=document.getElementById('recCount');
+  rBtns.forEach(function(b){b.addEventListener('click',function(){
+    var f=b.dataset.f, n=0; rBtns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    rows.forEach(function(r){var on=f==='all'||r.dataset.s===f; r.hidden=!on; if(on)n++});
+    count.textContent=n+(n===1?' project':' projects');
+  })});
+  count.textContent=rows.length+' projects';
+  // Lightbox
+  var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
+  document.querySelectorAll('.gallery button, .shots button, .train figure button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var im=btn.querySelector('img'); lbImg.src=im.currentSrc||im.src; lbImg.alt=im.alt; lbCap.textContent=im.alt;
+      if(lb.showModal) lb.showModal();
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click',function(){lb.close()});
+  lb.addEventListener('click',function(e){if(e.target===lb)lb.close()});
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+    var t=b.dataset.copy, done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1600)};
+    try{ navigator.clipboard.writeText(t).then(done,function(){sel(b)}); }catch(e){ sel(b); }
+  })});
+  function sel(b){var v=b.parentNode.querySelector('.v'); var r=document.createRange(); r.selectNodeContents(v); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Selected';}
+})();
+</script>
+
+</body></html>
